@@ -1,0 +1,25 @@
+{% extends "pages/page.html" %}
+
+{% block title %}Contact Us{% endblock title %}
+
+{% block content %}
+<h1>Contact Us</h1>
+
+{% if submitted %}
+    <p class = "success">
+        Your message was submitted successfully, Thank you
+    </p>
+{% else %}
+    <!-- browsers like chrome auto validate the values in the form so we deavtivate this in order for django to handle validation -->
+    <form action="" method="post" novalidate> <!-- telling the browser not to validate the form-->
+    <table>
+        {{ form.as_table }} <!-- rendering the form fields, rendering the form fields as table rows-->
+        <tr> <!-- Django doesn't render the table tags or the submit button-->
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Submit"></td>
+        </tr>
+    </table>
+    {% csrf_token %} <!--Cross-Site Reuest Forgeries-->
+    </form>
+{% endif %}
+{% endblock content %}
